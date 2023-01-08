@@ -19,7 +19,7 @@ export default function Products({arr, type}) {
   var uid = currentUser ? currentUser._id : '';
   const addToCart = async (el) => {
     if (uid) {
-      axios.post(`http://localhost:8080/api/cart`, {
+      axios.post(`https://sugar-cosmatics.onrender.com/api/cart`, {
         userId: uid,
         productId: el._id,
         quantity: 1,

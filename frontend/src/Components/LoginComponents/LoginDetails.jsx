@@ -1,8 +1,8 @@
-import axios from "axios";
-import React from "react";
-import { MdClose, MdSmartphone } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import axios from 'axios';
+import React from 'react';
+import {MdClose, MdSmartphone} from 'react-icons/md';
+import {useNavigate} from 'react-router-dom';
+import {useDispatch} from 'react-redux';
 import {
   LoginContainer,
   LoginHeader,
@@ -25,36 +25,35 @@ import {
   RegisterPageFormTitle,
   RegisterPageGoogle,
   RegisterPageGoogleImg,
-} from "./Login.style";
-import {
-  loginFailure,
-  loginStart,
-  loginSuccess,
-} from "../../redux/userReducer";
-import { ToastContainer, toast } from "react-toastify";
+} from './Login.style';
+import {loginFailure, loginStart, loginSuccess} from '../../redux/userReducer';
+import {ToastContainer, toast} from 'react-toastify';
 const LoginDetails = () => {
   const navigate = useNavigate();
-  let mobileNumber = localStorage.getItem("mobile");
-  const [email, setEmail] = React.useState("");
-  const [firstName, setFirstName] = React.useState("");
-  const [lastName, setLastName] = React.useState("");
+  let mobileNumber = localStorage.getItem('mobile');
+  const [email, setEmail] = React.useState('');
+  const [firstName, setFirstName] = React.useState('');
+  const [lastName, setLastName] = React.useState('');
   const dispatch = useDispatch();
   const handleRegisterUser = async (e) => {
     e.preventDefault();
     dispatch(loginStart());
     try {
-      const res = await axios.post("http://localhost:8080/api/user/register", {
-        email,
-        firstName,
-        lastName,
-        mobileNumber,
-      });
+      const res = await axios.post(
+        'https://sugar-cosmatics.onrender.com/api/user/register',
+        {
+          email,
+          firstName,
+          lastName,
+          mobileNumber,
+        }
+      );
       dispatch(loginSuccess(res.data));
-      toast.success("Registered Successfully");
-      navigate("/");
+      toast.success('Registered Successfully');
+      navigate('/');
     } catch (error) {
       dispatch(loginFailure());
-      toast.error("Something went wrong");
+      toast.error('Something went wrong');
     }
   };
   return (
@@ -65,20 +64,20 @@ const LoginDetails = () => {
       </LoginHeader>
       <MobileOTPBoxContainer>
         <MobileOTPBoxHeader>
-          <MdSmartphone style={{ height: "30px", width: "30px" }} />
+          <MdSmartphone style={{height: '30px', width: '30px'}} />
           <MobileOTPBoxHeaderTitle>Welcome!</MobileOTPBoxHeaderTitle>
         </MobileOTPBoxHeader>
-        <MobileOTPBoxBottomMessageLinkDiv mt="40px" gap="10px">
-          <MobileOTPBoxBottomMessageDes fs="16px">
+        <MobileOTPBoxBottomMessageLinkDiv mt='40px' gap='10px'>
+          <MobileOTPBoxBottomMessageDes fs='16px'>
             Phone Number Verified - +91 {`${mobileNumber}`}
           </MobileOTPBoxBottomMessageDes>
-          <MobileOTPBoxBottomMessageLink fs="16px">
+          <MobileOTPBoxBottomMessageLink fs='16px'>
             (Terms and Conditions)
           </MobileOTPBoxBottomMessageLink>
         </MobileOTPBoxBottomMessageLinkDiv>
 
         <RegisterPageGoogle>
-          <RegisterPageGoogleImg src="https://in.sugarcosmetics.com/desc-images/google.png" />
+          <RegisterPageGoogleImg src='https://in.sugarcosmetics.com/desc-images/google.png' />
         </RegisterPageGoogle>
         <MobileOTPFormBottomHR />
         <RegisterPageForm onSubmit={handleRegisterUser}>
@@ -87,21 +86,21 @@ const LoginDetails = () => {
           </RegisterPageFormTitle>
           <RegisterPageFormFLInputDiv>
             <RegisterPageFormFLInput
-              placeholder="First Name"
+              placeholder='First Name'
               onChange={(e) => setFirstName(e.target.value)}
             />
             <RegisterPageFormFLInput
-              placeholder="Last Name"
+              placeholder='Last Name'
               onChange={(e) => setLastName(e.target.value)}
             />
           </RegisterPageFormFLInputDiv>
           <RegisterPageFormEInputDiv>
             <RegisterPageFormEInput
-              placeholder="Email Address"
+              placeholder='Email Address'
               onChange={(e) => setEmail(e.target.value)}
             />
           </RegisterPageFormEInputDiv>
-          <RegisterPageFormButton type="submit" value="Save and Continue" />
+          <RegisterPageFormButton type='submit' value='Save and Continue' />
         </RegisterPageForm>
       </MobileOTPBoxContainer>
       <MobileOTPBoxBottomMessage>
@@ -112,10 +111,10 @@ const LoginDetails = () => {
           necessary to make the purchase process faster and easier.
         </MobileOTPBoxBottomMessageTitle>
         <MobileOTPBoxBottomMessageLinkDiv>
-          <MobileOTPBoxBottomMessageDes fs="12px">
+          <MobileOTPBoxBottomMessageDes fs='12px'>
             By Signing up or logging in, you agree to our
           </MobileOTPBoxBottomMessageDes>
-          <MobileOTPBoxBottomMessageLink fs="14px">
+          <MobileOTPBoxBottomMessageLink fs='14px'>
             Terms and Conditions
           </MobileOTPBoxBottomMessageLink>
         </MobileOTPBoxBottomMessageLinkDiv>

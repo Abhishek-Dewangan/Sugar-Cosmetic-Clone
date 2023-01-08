@@ -14,7 +14,9 @@ export default function Makeup() {
 
   const getData = async () => {
     try {
-      const res = await axios.get('http://localhost:8080/api/products');
+      const res = await axios.get(
+        'https://sugar-cosmatics.onrender.com/api/products'
+      );
       const data = await res.data;
       setData(data);
     } catch (error) {
@@ -28,7 +30,7 @@ export default function Makeup() {
 
   const handleaddCart = (el) => {
     if (uid) {
-      axios.post(`http://localhost:8080/api/cart`, {
+      axios.post(`https://sugar-cosmatics.onrender.com/api/cart`, {
         userId: uid,
         productId: el._id,
         quantity: 1,

@@ -34,7 +34,7 @@ export default function MakeupDetails() {
 
   const handleaddCart = async () => {
     if (uid) {
-      await axios.post(`http://localhost:8080/api/cart`, {
+      await axios.post(`https://sugar-cosmatics.onrender.com/api/cart`, {
         userId: uid,
         productId: makeupDesc._id,
         quantity: 1,

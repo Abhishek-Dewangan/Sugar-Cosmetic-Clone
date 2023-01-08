@@ -56,7 +56,7 @@ export const Home = () => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:8080/api/products')
+      .get('https://sugar-cosmatics.onrender.com/api/products')
       .then((data) => setData(data.data))
       .catch((e) => console.log(e));
   }, []);
