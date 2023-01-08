@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 // Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
+import {Swiper, SwiperSlide} from 'swiper/react';
 import ImageSlider from './ImageSlider';
 import Slider from './Slider';
 import Products from './Products';
@@ -14,16 +14,14 @@ import 'swiper/css/navigation';
 import './imageSlider.css';
 
 // import required modules
-import { Autoplay, Pagination, Navigation } from 'swiper';
-import { Box, Img } from '@chakra-ui/react';
+import {Autoplay, Pagination, Navigation} from 'swiper';
+import {Box, Img} from '@chakra-ui/react';
 
 const arr = [
   'https://d32baadbbpueqt.cloudfront.net/Homepage/70252059-0efb-40b0-b659-6d27afafa0ee.jpg',
   'https://d32baadbbpueqt.cloudfront.net/Homepage/bef74d73-5ede-43c7-8bef-f6208f7dd615.jpg',
   'https://d32baadbbpueqt.cloudfront.net/Homepage/ae9f9040-e1f1-4c94-bd8d-c05be3ce5fe2.gif',
   'https://d32baadbbpueqt.cloudfront.net/Homepage/9f159288-063a-4ca4-926a-7fd43c13d370.jpg',
-  'https://d32baadbbpueqt.cloudfront.net/549c6869-246f-4dba-8cde-7a6798f866ec.jpg',
-  'https://d32baadbbpueqt.cloudfront.net/fc27be93-0882-45d7-aef9-0ad461636eae.jpg',
   'https://d32baadbbpueqt.cloudfront.net/Homepage/32e53a7b-879e-4c34-a5bc-b95c85ee4a9e.jpg',
   'https://d32baadbbpueqt.cloudfront.net/Homepage/85bc9b9b-d8b3-4fa1-a1b0-a77ca9428664.jpg',
 ];
@@ -58,7 +56,7 @@ export const Home = () => {
 
   useEffect(() => {
     axios
-      .get('https://sugarcosmeticsclone.herokuapp.com/product')
+      .get('http://localhost:8080/api/products')
       .then((data) => setData(data.data))
       .catch((e) => console.log(e));
   }, []);
@@ -76,10 +74,16 @@ export const Home = () => {
         }}
         navigation={true}
         modules={[Autoplay, Pagination, Navigation]}
-        className='mySwiper'>
+        className='mySwiper'
+      >
         {arr.map((elm, index) => (
           <SwiperSlide key={index}>
-            <Img mb={10}  className='Imageslider_img' src={elm} alt='slider images' />
+            <Img
+              mb={10}
+              className='Imageslider_img'
+              src={elm}
+              alt='slider images'
+            />
           </SwiperSlide>
         ))}
       </Swiper>
@@ -103,16 +107,17 @@ export const Home = () => {
           title='YouTube video player'
           frameBorder='0'
           allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-          allowFullScreen></iframe>
+          allowFullScreen
+        ></iframe>
       </div>
       <h2 className='ReferFriends_home'>REFER YOUR FRIENDS</h2>
       <div className='referImage_home'>
-        <img
+        <Img
           src='https://d32baadbbpueqt.cloudfront.net/Homepage/5bd42d33-5894-4c9e-b7e8-ca4ceca79945.jpg'
           alt='refer image'
         />
       </div>
-      
+
       <div className='newlyLaunched_home'>
         <h2 className='allHeads_home'>NEWLY LAUNCHED</h2>
         <ImageSlider arr={newLaunched} />
@@ -152,8 +157,8 @@ export const Home = () => {
         <h2 className='allHeads_home'>SKINCARE BASICS</h2>
         <Products arr={Data} type='moisturizer' />
       </div>
-      </Box>
-      );
-    };
-    
-    // <h2 className='AIR_KISS_POWDER_HOME'>AIR KISS POWDER LIPSTICK</h2>
+    </Box>
+  );
+};
+
+// <h2 className='AIR_KISS_POWDER_HOME'>AIR KISS POWDER LIPSTICK</h2>

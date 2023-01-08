@@ -1,6 +1,6 @@
 import React from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { ToastContainer, toast } from 'react-toastify';
+import {Swiper, SwiperSlide} from 'swiper/react';
+import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import 'swiper/css';
@@ -9,25 +9,23 @@ import 'swiper/css/navigation';
 
 import styles from './product.module.css';
 
-import { Pagination, Navigation } from 'swiper';
+import {Pagination, Navigation} from 'swiper';
 import axios from 'axios';
-import { Box, Img } from '@chakra-ui/react';
+import {Box, Img} from '@chakra-ui/react';
+import {useSelector} from 'react-redux';
 
-export default function Products({ arr, type }) {
-  const notify = () => toast.success('added to cart');
-  // notify()
-  const user = JSON.parse(localStorage.getItem('User'));
-  const addToCart = async (prod) => {
-    try {
-      const res = await axios.post(
-        `https://sugarcosmeticsclone.herokuapp.com/cart/${user._id}`,
-        prod,
-      );
-      const data = await res.data;
-      console.log('cart-data: ', data);
-    } catch (error) {
-      console.log('error: ', error);
-    }
+export default function Products({arr, type}) {
+  const {currentUser} = useSelector((state) => state.user);
+  var uid = currentUser ? currentUser._id : '';
+  const addToCart = async (el) => {
+    if (uid) {
+      axios.post(`http://localhost:8080/api/cart`, {
+        userId: uid,
+        productId: el._id,
+        quantity: 1,
+      });
+      toast.success('Added to cart!');
+    } else toast.error('Please signin first');
   };
 
   arr = arr.filter((elm) => elm.category === type);
@@ -70,7 +68,8 @@ export default function Products({ arr, type }) {
             spaceBetween: 50,
             slidesPerGroup: 4,
           },
-        }}>
+        }}
+      >
         {arr.map((elm, index) => (
           <SwiperSlide key={index}>
             <Box mb={10} className={styles.productsDiv_individual_home_first}>
@@ -90,11 +89,11 @@ export default function Products({ arr, type }) {
                 </div>
               </div>
               <button
-                // onClick={() => {
-                //   addToCart(elm)
-                //   notify()
-                // }}
-                className={styles.addDiv_home}>
+                onClick={() => {
+                  addToCart(elm);
+                }}
+                className={styles.addDiv_home}
+              >
                 ADD TO CART
               </button>
             </Box>
