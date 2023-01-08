@@ -6,7 +6,7 @@ SUGAR Cosmetics is a cruelty-free makeup brand that is high on style and higher 
 
 ## Deployed Site
 
-[SugarCosmetics Clone](https://sugarcosmeticnem201.netlify.app/)
+[SugarCosmetics Clone](https://sugar-cosmatics.netlify.app/)
 
 ### Presentation
 
